@@ -42,22 +42,18 @@ void textToSpeech(const String& content) {
   http.addHeader("Authorization", "Bearer " + String(API_KEY));
 
   String postData = "{\"model\": \"tts-1\", \"voice\": \"alloy\", \"input\": \"" + content + "\"}";
-  M5.Lcd.println("textToSpeech");
   int httpResponseCode = http.POST(postData);
-  M5.Lcd.println("Done!!");
 
   if (httpResponseCode > 0) {
-    M5.Lcd.println("1");
     File file = SD.open("/speech.mp3", FILE_WRITE);
     if (file) {
       http.writeToStream(&file);
       file.close();
-      M5.Lcd.println("Audio saved to SD card");
     } else {
       M5.Lcd.println("Failed to open file on SD card");
     }
   } else {
-    M5.Lcd.println("textToSpeech エラー発生");
+    M5.Lcd.println("textToSpeech でエラー発生");
   }
 
   http.end();
