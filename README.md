@@ -6,5 +6,4 @@
 * フルスクラッチで C++ で開発するのは結構しんどいので、基本的には何かしらのfirmwareを使うことになる。
 * 一旦フルスクラッチで開発したものは assistant/assistant.ino で実装してある。
 
-公式の↓を参考にすると良い。
-https://github.com/m5stack/M5Stack/blob/master/docs/getting_started_ja.md
+[ここの公式](https://github.com/m5stack/M5Stack/blob/master/docs/getting_started_ja.md)を参考にすると良い。
