@@ -7,3 +7,8 @@
 * 一旦フルスクラッチで開発したものは assistant/assistant.ino で実装してある。
 
 [ここの公式](https://github.com/m5stack/M5Stack/blob/master/docs/getting_started_ja.md)を参考にすると良い。
+
+### M5Stack で JavaScript を動かす(Mac)
+
+1. https://github.com/Moddable-OpenSource/moddable/blob/public/documentation/Moddable%20SDK%20-%20Getting%20Started.md#macos に従って Moddable SDK をインストールする。
+1. https://github.com/Moddable-OpenSource/moddable/blob/public/documentation/devices/esp32.md#macos に従って ESP32 のドライバをインストールする。
