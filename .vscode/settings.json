@@ -3,9 +3,12 @@
     "commands": [
       {
         "match": ".*$",
-        "cmd": "npm @biomejs/biome check --apply ${file}"
+        "cmd": "npx @biomejs/biome check --apply ${file}"
+      },
+      {
+        "match": "\\.json$|\\.css$|\\.html$|\\.md$|\\.yml$",
+        "cmd": "npx prettier --write ${file}"
       }
-
     ]
   },
 
@@ -15,4 +18,4 @@
   },
 
   "cSpell.words": ["clipboardy", "himanushi", "openai", "preact"]
-  }
+}
