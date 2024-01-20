@@ -1,0 +1,18 @@
+{
+  "emeraldwalk.runonsave": {
+    "commands": [
+      {
+        "match": ".*$",
+        "cmd": "npm @biomejs/biome check --apply ${file}"
+      }
+
+    ]
+  },
+
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "*.tsx": "$(capture).module.css,$(capture).css"
+  },
+
+  "cSpell.words": ["clipboardy", "himanushi", "openai", "preact"]
+  }

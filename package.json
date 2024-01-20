@@ -1,0 +1,13 @@
+{
+    "name": "m5stack",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "biome-check": "biome check --apply"
+    },
+    "devDependencies": {
+        "@biomejs/biome": "^1.4.1",
+        "prettier": "^3.2.4"
+    }
+}
