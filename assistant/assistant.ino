@@ -16,6 +16,8 @@ void setup() {
   auto cfg = M5.config();
   CoreS3.begin(cfg);
 
+  M5.Lcd.println("Start");
+
   if (!SD.begin(4)) {
     M5.Lcd.println("No SD Card");
     return;
