@@ -1,21 +1,13 @@
 {
-	"defines": {
-		"cfe": { "kern": true }
-	},
-	"include": [
-		"$(MODDABLE)/examples/manifest_base.json",
-		"$(MODDABLE)/examples/manifest_piu.json"
-	],
-	"modules": {
-		"*": "./main"
-	},
-	"config": {
-		"touchCount": 0
-	},
-	"resources":{
-		"*-alpha": [
-			"$(MODDABLE)/examples/assets/fonts//OpenSans-Semibold-28",
-			"./myFont"
-		]
-	}
+  "include": [
+    "$(MODDABLE)/examples/manifest_base.json",
+    "$(MODDABLE)/examples/manifest_piu.json",
+    "$(MODDABLE)/examples/manifest_net.json",
+    "$(MODULES)/network/http/manifest.json"
+  ],
+  "modules": {
+    "*": "./main"
+  },
+  "config": {},
+  "resources": {}
 }
