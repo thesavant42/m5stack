@@ -1,16 +1,20 @@
 #include <M5CoreS3.h>
+#include "efont.h"
+#include "efontM5CoreS3.h"
+#include "efontEnableJa.h"
 
 void setup() {
-  auto cfg = M5.config();
-  CoreS3.begin(cfg);
+  M5.begin();
+  M5.Lcd.setCursor(0, 0);
 
-  M5.Lcd.println("Start");
+  printEfont("Hello");
+  printEfont("こんにちは");
 }
 
 void loop() {
   M5.update();
 
-  M5.Lcd.println(".");
+  printEfont("あ");
 
   delay(1000);
 }
