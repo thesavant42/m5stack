@@ -12,32 +12,37 @@
 static uint8_t currentTextSize = 1;
 
 void printEfont(char *str, int x = -1, int y = -1, int textsize = 1, uint16_t color = TFT_WHITE, uint16_t bgcolor = TFT_BLACK) {
-  if(x >= 0 && y >= 0) {
+  if (x >= 0 && y >= 0) {
     M5.Lcd.setCursor(x, y);
   }
-  if(textsize != currentTextSize) {
+  if (textsize != currentTextSize) {
     M5.Lcd.setTextSize(textsize);
-    currentTextSize = textsize; // テキストサイズを更新
+    currentTextSize = textsize;
   }
   M5.Lcd.setTextColor(color, bgcolor);
 
   byte font[32];
-  
-  while(*str != 0x00) {
+
+  while (*str != 0x00) {
     // 改行処理
-    if(*str == '\n') {
-      M5.Lcd.setCursor(M5.Lcd.getCursorX(), M5.Lcd.getCursorY() + 16 * textsize);
+    if (*str == '\n') {
+      M5.Lcd.setCursor(0, M5.Lcd.getCursorY() + 16 * textsize); // カーソルを次の行の開始位置に移動
       str++;
       continue;
     }
 
-    // フォント取得
     uint16_t strUTF16;
     str = efontUFT8toUTF16(&strUTF16, str);
     getefontData(font, strUTF16);
 
     // 文字横幅の計算
     int width = (strUTF16 < 0x0100) ? 8 : 16; // 半角は8、全角は16
+    width *= textsize; // テキストサイズに応じて調整
+
+    // 現在位置 + 文字幅がディスプレイ幅を超える場合、改行する
+    if (M5.Lcd.getCursorX() + width > M5.Lcd.width()) {
+      M5.Lcd.setCursor(0, M5.Lcd.getCursorY() + 16 * textsize); // カーソルを次の行の開始位置に移動
+    }
 
 #ifdef EFONT_DEBUG
     Serial.printf("str : U+%04X\n", strUTF16);
@@ -62,7 +67,7 @@ void printEfont(char *str, int x = -1, int y = -1, int textsize = 1, uint16_t co
     }
 
     // カーソルを文字分進める
-    M5.Lcd.setCursor(M5.Lcd.getCursorX() + width * textsize, M5.Lcd.getCursorY());
+    M5.Lcd.setCursor(M5.Lcd.getCursorX() + width, M5.Lcd.getCursorY());
   }
 }
 
