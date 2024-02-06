@@ -5,7 +5,6 @@
 
 void setup() {
   M5.begin();
-  M5.Lcd.setCursor(0, 0);
 
   printEfont("Hello");
   printEfont("こんにちは");
@@ -14,7 +13,7 @@ void setup() {
 void loop() {
   M5.update();
 
-  printEfont("あ");
+  printEfont("Hello");
 
   delay(1000);
 }
