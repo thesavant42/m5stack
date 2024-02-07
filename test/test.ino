@@ -13,7 +13,7 @@ void setup() {
 void loop() {
   M5.update();
 
-  printEfont("Hello");
+  printEfont("あいうえお");
 
   delay(1000);
 }

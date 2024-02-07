@@ -8,28 +8,35 @@
 #include <M5CoreS3.h>
 #include <SD.h>
 
+#include "efont.h"
+#include "efontM5CoreS3.h"
+#include "efontEnableJaMini.h"
+
 extern const char* API_KEY;
 extern const char* WIFI_SSID;
 extern const char* WIFI_PASSWORD;
 
 void setup() {
-  auto cfg = M5.config();
-  CoreS3.begin(cfg);
+  M5.begin();
 
-  M5.Lcd.println("Start");
+  printEfont("始まり！");
 
   if (!SD.begin(4)) {
-    M5.Lcd.println("No SD Card");
+    printEfont("SDカードない");
     return;
   }
+
+  Serial.println("2");
 
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
   }
 
-  String text = completions("何か短い雑学をお話しください");
-  M5.Lcd.print(text);
+  Serial.println("3");
+
+  String text = completions("短い雑学を話して");
+  printEfont(const_cast<char*>(text.c_str()));
   textToSpeech(text);
 }
 
@@ -42,8 +49,8 @@ void loop() {
 
   if (SD.exists(audioFileName) && !isPlaying) {
     isPlaying = true;
-    M5.Lcd.print("Play!");
-    playMP3(audioFileName);
+    printEfont("Play!");
+    // playMP3(audioFileName);
     // SD.remove(audioFileName);
     isPlaying = false;
   }

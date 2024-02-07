@@ -11,23 +11,25 @@ String completions(const String& content) {
   http.begin(String(openai_endpoint) + "/chat/completions");
   http.addHeader("Content-Type", "application/json");
   http.addHeader("Authorization", "Bearer " + String(API_KEY));
+  http.setTimeout(60000);
 
   String postData = "{\"model\": \"gpt-4\", \"messages\": [{\"role\": \"user\", \"content\": \"" + content + "\"}]}";
 
   int httpResponseCode = http.POST(postData);
   String text = "";
 
-  if (httpResponseCode > 0) {
-    String response = http.getString();
-    DynamicJsonDocument doc(1024);
-    deserializeJson(doc, response);
+  String response = http.getString();
+  DynamicJsonDocument doc(1024);
+  deserializeJson(doc, response);
 
+  if (httpResponseCode > 0) {
     JsonArray choices = doc["choices"];
     for (JsonObject choice : choices) {
       text = choice["message"]["content"].as<String>();
     }
   } else {
-    text = "エラーが発生しました。";
+    JsonObject error = doc["error"];
+    text = error["code"].as<String>();
   }
 
   http.end();
@@ -40,6 +42,7 @@ void textToSpeech(const String& content) {
   http.begin(String(openai_endpoint) + "/audio/speech");
   http.addHeader("Content-Type", "application/json");
   http.addHeader("Authorization", "Bearer " + String(API_KEY));
+  http.setTimeout(60000);
 
   String postData = "{\"model\": \"tts-1\", \"voice\": \"alloy\", \"input\": \"" + content + "\"}";
   int httpResponseCode = http.POST(postData);
