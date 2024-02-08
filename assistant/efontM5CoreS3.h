@@ -1,5 +1,5 @@
-#ifndef __EFONT_M5CORES3_H__
-#define __EFONT_M5CORES3_H__
+#ifndef __EFONT_M5_H__
+#define __EFONT_M5_H__
 
 #define EFONT_USED
 
@@ -69,4 +69,4 @@ void printEfont(char *str, int x = -1, int y = -1, int textsize = 1, uint16_t co
   }
 }
 
-#endif // __EFONT_M5CORES3_H__
+#endif // __EFONT_M5_H__

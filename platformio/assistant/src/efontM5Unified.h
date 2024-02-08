@@ -10,9 +10,19 @@
 
 static uint8_t currentTextSize = 1;
 
-void printEfont(char *str, int x = -1, int y = -1, int textsize = 1, uint16_t color = TFT_WHITE, uint16_t bgcolor = TFT_BLACK) {
-  if (x >= 0 && y >= 0) {
-    M5.Lcd.setCursor(x, y);
+static int lastX[255] = {0}, lastY[255] = {0};
+static int currentLayer = 0; 
+
+void printEfont(char *str, uint8_t layer, int x = -1, int y = -1, int textsize = 1, uint16_t color = TFT_WHITE, uint16_t bgcolor = TFT_BLACK) {
+  if (layer != currentLayer || x >= 0 && y >= 0) {
+    if (x >= 0 && y >= 0) {
+      M5.Lcd.setCursor(x, y);
+      lastX[layer] = x;
+      lastY[layer] = y;
+    } else {
+      M5.Lcd.setCursor(lastX[layer], lastY[layer]);
+    }
+    currentLayer = layer;
   }
   if (textsize != currentTextSize) {
     M5.Lcd.setTextSize(textsize);
@@ -60,6 +70,9 @@ void printEfont(char *str, int x = -1, int y = -1, int textsize = 1, uint16_t co
     }
 
     M5.Lcd.setCursor(M5.Lcd.getCursorX() + width, M5.Lcd.getCursorY());
+
+    lastX[layer] = M5.Lcd.getCursorX();
+    lastY[layer] = M5.Lcd.getCursorY();
   }
 }
 

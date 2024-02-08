@@ -47,16 +47,22 @@ void textToSpeech(const String& content) {
   String postData = "{\"model\": \"tts-1\", \"voice\": \"alloy\", \"input\": \"" + content + "\"}";
   int httpResponseCode = http.POST(postData);
 
+  String response = http.getString();
+  printEfont("post: ");
+  printEfont(const_cast<char*>(String(httpResponseCode).c_str()));
+  printEfont(const_cast<char*>(response.c_str()));
+  printEfont(const_cast<char*>(content.c_str()));
+
   if (httpResponseCode > 0) {
     File file = SD.open("/speech.mp3", FILE_WRITE);
     if (file) {
       http.writeToStream(&file);
       file.close();
     } else {
-      M5.Lcd.println("Failed to open file on SD card");
+      printEfont("Failed to open file on SD card");
     }
   } else {
-    M5.Lcd.println("textToSpeech でエラー発生");
+    printEfont("TextToSpeech でエラー発生");
   }
 
   http.end();

@@ -26,17 +26,12 @@ void setup() {
     return;
   }
 
-  Serial.println("2");
-
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
   }
 
-  Serial.println("3");
-
   String text = completions("短い雑学を話して");
-  printEfont(const_cast<char*>(text.c_str()));
   textToSpeech(text);
 }
 
