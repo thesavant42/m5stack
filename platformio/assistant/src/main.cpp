@@ -30,6 +30,7 @@ Button button1(0, 180, 160, 60, "何か話して", actionButton1);
 Button button2(160, 180, 160, 60, "録音", actionButton2);
 
 void setup() {
+  M5.Power.begin();
   M5.begin();
   M5.Lcd.fillScreen(BLACK);
 
@@ -55,4 +56,9 @@ void loop() {
   if (state_name[detail.state] == "touch_begin") {
     buttonManager.handleTouch(detail.x, detail.y);
   }
+
+  int32_t level = M5.Power.getBatteryLevel();
+  String levelStr = String(level) + "%";
+  printEfont(const_cast<char*>(levelStr.c_str()), 2, 100, 160);
+  delay(100);
 }
