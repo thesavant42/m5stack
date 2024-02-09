@@ -19,6 +19,7 @@ String completions(const String& content) {
   String text = "";
 
   String response = http.getString();
+  Serial.println(response);
   DynamicJsonDocument doc(1024);
   deserializeJson(doc, response);
 

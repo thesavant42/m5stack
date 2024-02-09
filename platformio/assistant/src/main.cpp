@@ -15,10 +15,11 @@ extern const char* WIFI_PASSWORD;
 ButtonManager buttonManager;
 
 void actionButton1() {
-  printEfont("考え中...", 0, 0, 0);
-  String content = completions("100文字程度で何かタメになる雑学をお話しして。友達に話すような感じで。");
-  M5.Lcd.fillRect(0, 0, 320, 189, TFT_BLACK);
-  printEfont(const_cast<char*>(content.c_str()), 0, 0, 0);
+  M5.Lcd.fillRect(0, 0, 320, 180, TFT_BLACK);
+  printEfont("考え中...", 1, 0, 0);
+  String content = completions("100文字程度で何かタメになる雑学をお話しして。子供が好きそうなネタで。友達に話すような感じで。");
+  M5.Lcd.fillRect(0, 0, 320, 180, TFT_BLACK);
+  printEfont(const_cast<char*>(content.c_str()), 1, 0, 0);
 }
 
 void actionButton2() {
@@ -34,10 +35,13 @@ void setup() {
 
   Serial.begin(115200);
 
+  printEfont("Wifi Connecting", 2, 0, 0);
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
   while (WiFi.status() != WL_CONNECTED) {
+    printEfont(".", 2);
     delay(500);
   }
+  M5.Lcd.fillScreen(BLACK);
 
   buttonManager.addButton(button1);
   buttonManager.addButton(button2);

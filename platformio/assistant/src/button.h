@@ -25,7 +25,7 @@ public:
     // ボタンをLCDに描画
     void draw() {
         M5.Lcd.drawRect(x, y, width, height, WHITE);
-        printEfont(const_cast<char*>(label.c_str()), 0, x + 5, y + height / 4);
+        printEfont(const_cast<char*>(label.c_str()), 0, x + 20, y + height / 3);
     }
 
     // 指定された座標がボタン内か判定
