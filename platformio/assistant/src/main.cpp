@@ -9,10 +9,7 @@ void setup() {
   
   printEfont("Hello", 1, 0, 16*0);
   printEfont("こんにちは", 2, 0, 16*1);
-  printEfont("1月４日　土曜日　９時５５分", 3, 0, 16*2);
-
-  clearEfont(2);
-  printEfont("ニーハオ！", 2, 0, 16*1);
+  printEfont("1月４日　土曜日　９時５５分", 3, 0, 16*3);
 }
 
 void loop() {

@@ -11,36 +11,12 @@
 static uint8_t currentTextSize = 1;
 
 static int lastX[255] = {0}, lastY[255] = {0};
-static int startX[255] = {0}, startY[255] = {0};
-static int endX[255] = {0}, endY[255] = {0};
-static int currentLayer = 0;
-
-void clearEfont(uint8_t layer, uint16_t bgcolor = TFT_BLACK) {
-  if (startX[layer] == 0 && startY[layer] == 0 && endX[layer] == 0 && endY[layer] == 0) {
-    // このレイヤーには描画されたテキストがない場合、処理をスキップ
-    return;
-  }
-
-  int width = endX[layer] - startX[layer];
-  int height = (endY[layer] - startY[layer]) + (16 * currentTextSize); // テキストサイズに基づく高さの調整
-
-  // 実際に塗りつぶす範囲が画面内にあるか確認し、必要に応じて調整
-  if (width > 0 && height > 0) {
-    M5.Lcd.fillRect(startX[layer], startY[layer], width, height, bgcolor);
-  }
-
-  // レイヤーの位置情報をリセット
-  startX[layer] = startY[layer] = endX[layer] = endY[layer] = 0;
-}
+static int currentLayer = 0; 
 
 void printEfont(char *str, uint8_t layer, int x = -1, int y = -1, int textsize = 1, uint16_t color = TFT_WHITE, uint16_t bgcolor = TFT_BLACK) {
   if (layer != currentLayer || x >= 0 && y >= 0) {
     if (x >= 0 && y >= 0) {
       M5.Lcd.setCursor(x, y);
-      if (startX[layer] == 0 && startY[layer] == 0) { // 初めての位置を設定
-        startX[layer] = x;
-        startY[layer] = y;
-      }
       lastX[layer] = x;
       lastY[layer] = y;
     } else {
@@ -74,7 +50,10 @@ void printEfont(char *str, uint8_t layer, int x = -1, int y = -1, int textsize =
       M5.Lcd.setCursor(0, M5.Lcd.getCursorY() + 16 * textsize);
     }
 
-    // 描画
+#ifdef EFONT_DEBUG
+    Serial.printf("str : U+%04X\n", strUTF16);
+#endif
+
     for (int row = 0; row < 16; row++) {
       uint16_t fontdata = (font[row * 2] << 8) | font[row * 2 + 1];
       for (int col = 0; col < 16; col++) {
@@ -94,9 +73,6 @@ void printEfont(char *str, uint8_t layer, int x = -1, int y = -1, int textsize =
 
     lastX[layer] = M5.Lcd.getCursorX();
     lastY[layer] = M5.Lcd.getCursorY();
-    // 終了位置を更新
-    endX[layer] = lastX[layer];
-    endY[layer] = lastY[layer];
   }
 }
 
