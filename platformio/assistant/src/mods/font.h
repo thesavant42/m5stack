@@ -4,7 +4,6 @@
 #define EFONT_USED
 
 #include <M5Unified.h>
-#include "efont.h"
 
 //#define EFONT_DEBUG
 

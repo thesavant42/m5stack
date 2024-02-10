@@ -3,9 +3,7 @@
 
 #include <M5Unified.h>
 
-#include "efont.h"
 #include "font.h"
-#include "efontEnableJaMini.h"
 
 static constexpr const char* state_name[16] = {
             "none", "touch", "touch_end", "touch_begin",

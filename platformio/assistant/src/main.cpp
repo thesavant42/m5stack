@@ -1,10 +1,13 @@
 #include <M5Unified.h>
 #include <SD.h>
 
+#include "efontEnableJaMini.h"
+#include "efont.h"
+
+#include "mods/font.h"
 #include "mods/brightness.h"
 #include "mods/battery.h"
 #include "mods/env.h"
-#include "mods/font.h"
 #include "mods/wifi.h"
 #include "mods/button.h"
 #include "api/openai.h"

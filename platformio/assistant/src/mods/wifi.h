@@ -3,7 +3,6 @@
 
 #include <WiFi.h>
 
-#include "efont.h"
 #include "mods/font.h"
 
 void initWifi() {
