@@ -13,7 +13,7 @@ String completions(const String& content) {
   http.addHeader("Authorization", "Bearer " + String(API_KEY));
   http.setTimeout(60000);
 
-  String postData = "{\"model\": \"gpt-4\", \"messages\": [{\"role\": \"user\", \"content\": \"" + content + "\"}]}";
+  String postData = "{\"model\": \"gpt-4-turbo-preview\", \"messages\": [{\"role\": \"user\", \"content\": \"" + content + "\"}]}";
 
   int httpResponseCode = http.POST(postData);
   String text = "";

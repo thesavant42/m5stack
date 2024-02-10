@@ -17,7 +17,7 @@ ButtonManager buttonManager;
 void actionButton1() {
   M5.Lcd.fillRect(0, 0, 320, 180, TFT_BLACK);
   printEfont("考え中...", 1, 0, 0);
-  String content = completions("100文字程度で何かタメになる雑学をお話しして。子供が好きそうなネタで。友達に話すような感じで。");
+  String content = completions("100文字程度で何かタメになる雑学をお話しして。子供が好きそうなネタで。友達に話すような感じで。本当の話で。");
   M5.Lcd.fillRect(0, 0, 320, 180, TFT_BLACK);
   printEfont(const_cast<char*>(content.c_str()), 1, 0, 0);
 }
