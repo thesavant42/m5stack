@@ -2,6 +2,7 @@
 #include <WiFi.h>
 #include <SD.h>
 
+#include "mods/brightness.h"
 #include "mods/battery.h"
 #include "sdData.h"
 #include "efont.h"
@@ -48,6 +49,8 @@ void setup() {
   Serial.begin(115200);
   delay(500);
 
+  initAutoBrightness();
+
   if (!SD.begin(4)) {
     printEfont("SDカードがない", 2);
     return;
@@ -79,6 +82,10 @@ void loop() {
 
   if (scheduler.execMs(10000)) {
     drawBattery();
+  }
+
+  if (scheduler.execMs(1000)) {
+    autoBrightness();
   }
 
   auto detail = M5.Touch.getDetail();
