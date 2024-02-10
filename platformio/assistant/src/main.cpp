@@ -2,17 +2,16 @@
 #include <WiFi.h>
 #include <SD.h>
 
+#include "mods/battery.h"
 #include "sdData.h"
 #include "efont.h"
 #include "efontM5Unified.h"
 #include "efontEnableJaMini.h"
 #include "button.h"
 #include "openai.h"
+#include "scheduler.h"
 
-extern const char* API_KEY;
-extern const char* WIFI_SSID;
-extern const char* WIFI_PASSWORD;
-
+Scheduler scheduler;
 ButtonManager buttonManager;
 
 void actionButton1() {
@@ -74,9 +73,7 @@ void loop() {
     buttonManager.handleTouch(detail.x, detail.y);
   }
 
-  int32_t level = M5.Power.getBatteryLevel();
-  String levelStr = String(level) + "%";
-  printEfont(const_cast<char*>(levelStr.c_str()), 2, 100, 160);
-
-  delay(10);
+  if (scheduler.execMs(10000)) {
+    drawBattery(100, 100);
+  }
 }
