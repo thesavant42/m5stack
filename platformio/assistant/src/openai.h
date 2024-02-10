@@ -3,14 +3,13 @@
 #include <M5Unified.h>
 #include <SD.h>
 
-extern const char* API_KEY;
 const char* openai_endpoint = "https://api.openai.com/v1";
 
 String completions(const String& content) {
   HTTPClient http;
   http.begin(String(openai_endpoint) + "/chat/completions");
   http.addHeader("Content-Type", "application/json");
-  http.addHeader("Authorization", "Bearer " + String(API_KEY));
+  http.addHeader("Authorization", "Bearer " + String(getEnvValue("API_KEY")));
   http.setTimeout(60000);
 
   String postData = "{\"model\": \"gpt-4-turbo-preview\", \"messages\": [{\"role\": \"user\", \"content\": \"" + content + "\"}]}";
@@ -46,7 +45,7 @@ String textToSpeech(const String& content) {
   HTTPClient http;
   http.begin(String(openai_endpoint) + "/audio/speech");
   http.addHeader("Content-Type", "application/json");
-  http.addHeader("Authorization", "Bearer " + String(API_KEY));
+  http.addHeader("Authorization", "Bearer " + String(getEnvValue("API_KEY")));
   http.setTimeout(60000);
 
   String postData = "{\"model\": \"tts-1\", \"voice\": \"alloy\", \"input\": \"" + content + "\"}";
@@ -61,10 +60,11 @@ String textToSpeech(const String& content) {
       http.writeToStream(&file);
       file.close();
     } else {
-      text = "Failed to open file on SD card";
+      Serial.println("Failed to open file on SD card");
     }
   } else {
-    text = "TextToSpeech でエラー発生";
+    Serial.println("TextToSpeech でエラー発生");
+    Serial.println(httpResponseCode);
   }
 
   http.end();

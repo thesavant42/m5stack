@@ -2,7 +2,7 @@
 #include <WiFi.h>
 #include <SD.h>
 
-#include "credentials.h"
+#include "sdData.h"
 #include "efont.h"
 #include "efontM5Unified.h"
 #include "efontEnableJaMini.h"
@@ -40,19 +40,26 @@ void setup() {
   M5.Lcd.fillScreen(BLACK);
 
   Serial.begin(115200);
+  delay(500);
 
   if (!SD.begin(4)) {
     printEfont("SDカードがない", 2);
     return;
   }
 
+  loadEnvVariables(SD, "/env.txt");
+
   printEfont("Wifi Connecting", 2, 0, 0);
-  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+  WiFi.begin(getEnvValue("WIFI_SSID"), getEnvValue("WIFI_PASSWORD"));
   while (WiFi.status() != WL_CONNECTED) {
     printEfont(".", 2);
     delay(500);
   }
   M5.Lcd.fillScreen(BLACK);
+
+  // OpenAI API の DNS サーバーを指定
+  IPAddress dns(104, 18, 6, 192);
+  WiFi.config(INADDR_NONE, INADDR_NONE, INADDR_NONE, dns);
 
   buttonManager.addButton(button1);
   buttonManager.addButton(button2);
