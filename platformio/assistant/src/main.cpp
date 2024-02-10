@@ -4,12 +4,11 @@
 #include "mods/brightness.h"
 #include "mods/battery.h"
 #include "mods/env.h"
-#include "efont.h"
 #include "mods/font.h"
 #include "mods/wifi.h"
-#include "efontEnableJaMini.h"
 #include "mods/button.h"
 #include "api/openai.h"
+#include "mods/scheduler.h"
 #include "mods/scheduler.h"
 
 Scheduler scheduler;
