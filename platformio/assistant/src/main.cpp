@@ -1,5 +1,6 @@
 #include <M5Unified.h>
 #include <WiFi.h>
+#include <SD.h>
 
 #include "credentials.h"
 #include "efont.h"
@@ -20,6 +21,10 @@ void actionButton1() {
   String content = completions("100文字程度で何かタメになる雑学をお話しして。子供が好きそうなネタで。友達に話すような感じで。本当の話で。");
   M5.Lcd.fillRect(0, 0, 320, 180, TFT_BLACK);
   printEfont(const_cast<char*>(content.c_str()), 1, 0, 0);
+  if (content != "") {
+    String speech = textToSpeech(content);
+    Serial.println(speech);
+  }
 }
 
 void actionButton2() {
@@ -35,6 +40,11 @@ void setup() {
   M5.Lcd.fillScreen(BLACK);
 
   Serial.begin(115200);
+
+  if (!SD.begin(4)) {
+    printEfont("SDカードがない", 2);
+    return;
+  }
 
   printEfont("Wifi Connecting", 2, 0, 0);
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
@@ -60,5 +70,6 @@ void loop() {
   int32_t level = M5.Power.getBatteryLevel();
   String levelStr = String(level) + "%";
   printEfont(const_cast<char*>(levelStr.c_str()), 2, 100, 160);
-  delay(100);
+
+  delay(10);
 }

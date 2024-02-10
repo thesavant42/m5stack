@@ -24,13 +24,17 @@ String completions(const String& content) {
   deserializeJson(doc, response);
 
   if (httpResponseCode > 0) {
-    JsonArray choices = doc["choices"];
-    for (JsonObject choice : choices) {
-      text = choice["message"]["content"].as<String>();
+    if(doc["choices"].isNull()) {
+      JsonObject error = doc["error"];
+      Serial.println(error["code"].as<String>());
+    } else {
+      JsonArray choices = doc["choices"];
+      for (JsonObject choice : choices) {
+        text = choice["message"]["content"].as<String>();
+      }
     }
   } else {
-    JsonObject error = doc["error"];
-    text = error["code"].as<String>();
+    Serial.println(httpResponseCode);
   }
 
   http.end();
@@ -52,7 +56,7 @@ String textToSpeech(const String& content) {
 
   String text = content;
   if (httpResponseCode > 0) {
-    File file = SD.open("/speech.mp3", FILE_WRITE);
+    File file = SD.open("/tts.mp3", FILE_WRITE);
     if (file) {
       http.writeToStream(&file);
       file.close();
