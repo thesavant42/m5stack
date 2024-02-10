@@ -34,4 +34,4 @@ void drawBattery() {
   M5.Lcd.drawString(levelStr, textX - 3, textY, 2); // フォントサイズ2を指定
 }
 
-#endif // BATTERY_H
+#endif

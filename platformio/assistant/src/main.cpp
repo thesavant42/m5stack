@@ -5,7 +5,7 @@
 #include "mods/battery.h"
 #include "mods/env.h"
 #include "efont.h"
-#include "mods/efontM5Unified.h"
+#include "mods/font.h"
 #include "mods/wifi.h"
 #include "efontEnableJaMini.h"
 #include "mods/button.h"
@@ -22,12 +22,12 @@ void resetScreen() {
 void actionButton1() {
   resetScreen();
 
-  printEfont("考え中...", 1, 0, 20);
+  puts("考え中...", 1, 0, 20);
   String content = completions("100文字程度で何かタメになる雑学をお話しして。子供が好きそうなネタで。友達に話すような感じで。本当の話で。");
   
   resetScreen();
   
-  printEfont(const_cast<char*>(content.c_str()), 1, 0, 20);
+  puts(const_cast<char*>(content.c_str()), 1, 0, 20);
   if (content != "") {
     String speech = textToSpeech(content);
     Serial.println(speech);
@@ -49,7 +49,7 @@ void setup() {
   M5.Lcd.fillScreen(BLACK);
 
   if (!SD.begin(4)) {
-    printEfont("SDカードがない", 2);
+    puts("SDカードがない", 2);
     return;
   }
 

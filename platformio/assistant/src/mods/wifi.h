@@ -4,13 +4,13 @@
 #include <WiFi.h>
 
 #include "efont.h"
-#include "mods/efontM5Unified.h"
+#include "mods/font.h"
 
 void initWifi() {
-  printEfont("Wifi Connecting", 2, 0, 0);
+  puts("Wifi Connecting", 2, 0, 0);
   WiFi.begin(getEnvValue("WIFI_SSID"), getEnvValue("WIFI_PASSWORD"));
   while (WiFi.status() != WL_CONNECTED) {
-    printEfont(".", 2);
+    puts(".", 2);
     delay(500);
   }
   M5.Lcd.fillScreen(BLACK);

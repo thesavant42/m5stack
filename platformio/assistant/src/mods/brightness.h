@@ -10,9 +10,6 @@ uint16_t read_als_value;
 
 void initAutoBrightness() {
     if (!CoreS3.Ltr553.begin(&device_init_base_para)) {
-        CoreS3.Display.drawString("Ltr553 Init Fail",
-                                  CoreS3.Display.width() / 2,
-                                  CoreS3.Display.height() / 2);
         while (1) {
             delay(10);
         }
@@ -26,4 +23,4 @@ void autoBrightness() {
     M5.Lcd.setBrightness(read_als_value*5+50);
 }
 
-#endif // BRIGHTNESS_H
+#endif

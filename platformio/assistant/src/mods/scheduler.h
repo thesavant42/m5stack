@@ -19,4 +19,4 @@ public:
     }
 };
 
-#endif // SCHEDULER_H
+#endif

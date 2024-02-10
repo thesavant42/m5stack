@@ -4,7 +4,7 @@
 #include <M5Unified.h>
 
 #include "efont.h"
-#include "efontM5Unified.h"
+#include "font.h"
 #include "efontEnableJaMini.h"
 
 static constexpr const char* state_name[16] = {
@@ -28,7 +28,7 @@ public:
     // ボタンをLCDに描画
     void draw() {
         M5.Lcd.drawRect(x, y, width, height, WHITE);
-        printEfont(const_cast<char*>(label.c_str()), 0, x + 20, y + height / 3);
+        puts(const_cast<char*>(label.c_str()), 0, x + 20, y + height / 3);
     }
 
     // 指定された座標がボタン内か判定
@@ -69,4 +69,4 @@ public:
     }
 };
 
-#endif // BUTTON_H
+#endif

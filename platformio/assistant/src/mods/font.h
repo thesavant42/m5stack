@@ -13,7 +13,7 @@ static uint8_t currentTextSize = 1;
 static int lastX[255] = {0}, lastY[255] = {0};
 static int currentLayer = 0; 
 
-void printEfont(char *str, uint8_t layer, int x = -1, int y = -1, int textsize = 1, uint16_t color = TFT_WHITE, uint16_t bgcolor = TFT_BLACK) {
+void puts(char *str, uint8_t layer, int x = -1, int y = -1, int textsize = 1, uint16_t color = TFT_WHITE, uint16_t bgcolor = TFT_BLACK) {
   if (layer != currentLayer || x >= 0 && y >= 0) {
     if (x >= 0 && y >= 0) {
       M5.Lcd.setCursor(x, y);
@@ -76,4 +76,4 @@ void printEfont(char *str, uint8_t layer, int x = -1, int y = -1, int textsize =
   }
 }
 
-#endif // __EFONT_M5_H__
+#endif

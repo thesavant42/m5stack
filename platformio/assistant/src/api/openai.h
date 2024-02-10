@@ -75,4 +75,4 @@ String textToSpeech(const String& content) {
   return text;
 }
 
-#endif // OPENAI_H
+#endif
