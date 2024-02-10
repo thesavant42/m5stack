@@ -1,8 +1,10 @@
 #include <M5Unified.h>
 
-void drawBattery(int x, int y) {
-  int width = 40;
-  int height = 20;
+void drawBattery() {
+  int x = 275;
+  int y = 0;
+  int width = 35;
+  int height = 15;
   int32_t level = M5.Power.getBatteryLevel();
 
   // バッテリーの枠を描画
@@ -21,10 +23,10 @@ void drawBattery(int x, int y) {
   int textWidth = levelStr.length() * 6; // テキストの幅のおおよその計算
   int textHeight = 8; // テキストの高さのおおよその計算
   int textX = x + width / 2 - textWidth / 2; // テキストの中央揃え
-  int textY = y + height / 2 - textHeight / 2; // 高さの中央
+  int textY = y + height / 2 - textHeight / 1; // 高さの中央
   M5.Lcd.fillRect(textX, textY, textWidth, textHeight, GREEN); // テキスト背景を緑色に塗りつぶす
 
   // バッテリーレベルのテキストを描画
   M5.Lcd.setTextColor(BLACK); // テキストの色を白に設定
-  M5.Lcd.drawString(levelStr, textX, textY, 2); // フォントサイズ2を指定
+  M5.Lcd.drawString(levelStr, textX - 3, textY, 2); // フォントサイズ2を指定
 }

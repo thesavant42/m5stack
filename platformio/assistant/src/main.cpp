@@ -14,12 +14,19 @@
 Scheduler scheduler;
 ButtonManager buttonManager;
 
+void resetScreen() {
+  M5.Lcd.fillRect(0, 20, 320, 160, TFT_BLACK);
+}
+
 void actionButton1() {
-  M5.Lcd.fillRect(0, 0, 320, 180, TFT_BLACK);
-  printEfont("考え中...", 1, 0, 0);
+  resetScreen();
+
+  printEfont("考え中...", 1, 0, 20);
   String content = completions("100文字程度で何かタメになる雑学をお話しして。子供が好きそうなネタで。友達に話すような感じで。本当の話で。");
-  M5.Lcd.fillRect(0, 0, 320, 180, TFT_BLACK);
-  printEfont(const_cast<char*>(content.c_str()), 1, 0, 0);
+  
+  resetScreen();
+  
+  printEfont(const_cast<char*>(content.c_str()), 1, 0, 20);
   if (content != "") {
     String speech = textToSpeech(content);
     Serial.println(speech);
@@ -63,17 +70,19 @@ void setup() {
   buttonManager.addButton(button1);
   buttonManager.addButton(button2);
   buttonManager.drawButtons();
+
+  drawBattery();
 }
 
 void loop() {
   M5.update();
 
+  if (scheduler.execMs(10000)) {
+    drawBattery();
+  }
+
   auto detail = M5.Touch.getDetail();
   if (state_name[detail.state] == "touch_begin") {
     buttonManager.handleTouch(detail.x, detail.y);
-  }
-
-  if (scheduler.execMs(10000)) {
-    drawBattery(100, 100);
   }
 }
