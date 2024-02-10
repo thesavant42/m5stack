@@ -1,3 +1,6 @@
+#ifndef BUTTON_H
+#define BUTTON_H
+
 #include <M5Unified.h>
 
 #include "efont.h"
@@ -65,3 +68,5 @@ public:
         }
     }
 };
+
+#endif // BUTTON_H

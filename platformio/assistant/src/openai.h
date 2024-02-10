@@ -1,3 +1,6 @@
+#ifndef OPENAI_H
+#define OPENAI_H
+
 #include <HTTPClient.h>
 #include <ArduinoJson.h>
 #include <M5Unified.h>
@@ -71,3 +74,5 @@ String textToSpeech(const String& content) {
 
   return text;
 }
+
+#endif // OPENAI_H

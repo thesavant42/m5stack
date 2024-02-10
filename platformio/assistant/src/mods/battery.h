@@ -1,3 +1,6 @@
+#ifndef BATTERY_H
+#define BATTERY_H
+
 #include <M5Unified.h>
 
 void drawBattery() {
@@ -30,3 +33,5 @@ void drawBattery() {
   M5.Lcd.setTextColor(BLACK); // テキストの色を白に設定
   M5.Lcd.drawString(levelStr, textX - 3, textY, 2); // フォントサイズ2を指定
 }
+
+#endif // BATTERY_H

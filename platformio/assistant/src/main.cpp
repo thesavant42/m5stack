@@ -80,16 +80,16 @@ void setup() {
 void loop() {
   M5.update();
 
+  auto detail = M5.Touch.getDetail();
+  if (state_name[detail.state] == "touch_begin") {
+    buttonManager.handleTouch(detail.x, detail.y);
+  }
+
   if (scheduler.execMs(10000)) {
     drawBattery();
   }
 
   if (scheduler.execMs(1000)) {
     autoBrightness();
-  }
-
-  auto detail = M5.Touch.getDetail();
-  if (state_name[detail.state] == "touch_begin") {
-    buttonManager.handleTouch(detail.x, detail.y);
   }
 }

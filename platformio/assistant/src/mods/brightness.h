@@ -1,3 +1,6 @@
+#ifndef BRIGHTNESS_H
+#define BRIGHTNESS_H
+
 #include "M5CoreS3.h"
 
 Ltr5xx_Init_Basic_Para device_init_base_para = LTR5XX_BASE_PARA_CONFIG_DEFAULT;
@@ -22,3 +25,5 @@ void autoBrightness() {
     read_als_value = CoreS3.Ltr553.getAlsValue();
     M5.Lcd.setBrightness(read_als_value*5+50);
 }
+
+#endif // BRIGHTNESS_H

@@ -1,3 +1,6 @@
+#ifndef SD_DATA_H
+#define SD_DATA_H
+
 #include <SD.h>
 #include <FS.h>
 #include <map>
@@ -30,3 +33,5 @@ String getEnvValue(const String& key) {
     }
     return String("");
 }
+
+#endif // SD_DATA_H
