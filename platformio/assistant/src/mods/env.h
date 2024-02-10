@@ -1,5 +1,5 @@
-#ifndef SD_DATA_H
-#define SD_DATA_H
+#ifndef ENV_H
+#define ENV_H
 
 #include <SD.h>
 #include <FS.h>
@@ -34,4 +34,4 @@ String getEnvValue(const String& key) {
     return String("");
 }
 
-#endif // SD_DATA_H
+#endif // ENV_H

@@ -1,16 +1,16 @@
 #include <M5Unified.h>
-#include <WiFi.h>
 #include <SD.h>
 
 #include "mods/brightness.h"
 #include "mods/battery.h"
-#include "sdData.h"
+#include "mods/env.h"
 #include "efont.h"
-#include "efontM5Unified.h"
+#include "mods/efontM5Unified.h"
+#include "mods/wifi.h"
 #include "efontEnableJaMini.h"
-#include "button.h"
-#include "openai.h"
-#include "scheduler.h"
+#include "mods/button.h"
+#include "api/openai.h"
+#include "mods/scheduler.h"
 
 Scheduler scheduler;
 ButtonManager buttonManager;
@@ -42,39 +42,25 @@ Button button1(0, 180, 160, 60, "何か話して", actionButton1);
 Button button2(160, 180, 160, 60, "録音", actionButton2);
 
 void setup() {
+  Serial.begin(115200);
+
   M5.Power.begin();
   M5.begin();
   M5.Lcd.fillScreen(BLACK);
-
-  Serial.begin(115200);
-  delay(500);
-
-  initAutoBrightness();
 
   if (!SD.begin(4)) {
     printEfont("SDカードがない", 2);
     return;
   }
 
+  initAutoBrightness();
   loadEnvVariables(SD, "/env.txt");
-
-  printEfont("Wifi Connecting", 2, 0, 0);
-  WiFi.begin(getEnvValue("WIFI_SSID"), getEnvValue("WIFI_PASSWORD"));
-  while (WiFi.status() != WL_CONNECTED) {
-    printEfont(".", 2);
-    delay(500);
-  }
-  M5.Lcd.fillScreen(BLACK);
-
-  // OpenAI API の DNS サーバーを指定
-  IPAddress dns(104, 18, 6, 192);
-  WiFi.config(INADDR_NONE, INADDR_NONE, INADDR_NONE, dns);
+  initWifi();
+  drawBattery();
 
   buttonManager.addButton(button1);
   buttonManager.addButton(button2);
   buttonManager.drawButtons();
-
-  drawBattery();
 }
 
 void loop() {
