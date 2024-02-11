@@ -9,6 +9,7 @@
 #include "features/display.h"
 #include "features/env.h"
 #include "features/font.h"
+#include "features/rtc.h"
 #include "features/scheduler.h"
 #include "features/wifi.h"
 
@@ -23,6 +24,7 @@ void setup() {
   initFont();
   initEnv(SD, "/env.txt");
   initWifi();
+  initRtc();
   initAutoBrightness();
 
   // draw
@@ -39,7 +41,7 @@ void loop() {
     autoBrightness();
   }
 
-  if (scheduler.intervalMs(1000)) {
+  if (scheduler.intervalMs(10000)) {
     drawStatusbar();
   }
 
