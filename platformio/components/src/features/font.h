@@ -13,4 +13,8 @@ void p(const char *str, int textColor = WHITE_COLOR,
   display.print(str);
 }
 
+void p(int str, int textColor = WHITE_COLOR, int bgColor = BLACK_COLOR) {
+  p((const char *)str, textColor, bgColor);
+}
+
 #endif

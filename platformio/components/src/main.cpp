@@ -3,6 +3,7 @@
 #include <SD.h>
 
 #include "components/statusbar.h"
+#include "components/wifi-status.h"
 #include "const.h"
 #include "features/brightness.h"
 #include "features/display.h"
@@ -38,7 +39,7 @@ void loop() {
     autoBrightness();
   }
 
-  if (scheduler.intervalMs(5000)) {
+  if (scheduler.intervalMs(1000)) {
     drawStatusbar();
   }
 

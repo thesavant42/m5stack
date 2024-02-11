@@ -9,8 +9,8 @@
 extern M5GFX display;
 
 void drawBattery(int x, int y) {
-  int width = 30;
-  int height = 15;
+  int width = 25;
+  int height = 13;
   int32_t level = M5.Power.getBatteryLevel();
 
   // バッテリーの枠を描画
@@ -23,7 +23,7 @@ void drawBattery(int x, int y) {
 
   // バッテリーレベルに基づいて内部を塗りつぶす
   int fillWidth = (level * (width - 2)) / 100;
-  display.fillRect(x + 1, y + 1, fillWidth, height - 2, GREEN_COLOR);
+  display.fillRect(x + 1, y + 1, fillWidth, height - 2, WHITE_COLOR);
 }
 
 #endif
