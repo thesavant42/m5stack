@@ -1,6 +1,8 @@
 #include <M5GFX.h>
 #include <M5Unified.h>
 
+#include "components/statusbar.h"
+#include "const.h"
 #include "features/brightness.h"
 #include "features/display.h"
 #include "features/font.h"
@@ -16,7 +18,7 @@ void setup() {
   initAutoBrightness();
   initFont();
 
-  p("こんにちは日本");
+  drawStatusbar();
 }
 
 void loop() {
@@ -26,6 +28,10 @@ void loop() {
 
   if (scheduler.intervalMs(1000)) {
     autoBrightness();
+  }
+
+  if (scheduler.intervalMs(5000)) {
+    drawStatusbar();
   }
 
   display.display();

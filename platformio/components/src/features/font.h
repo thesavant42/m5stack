@@ -7,6 +7,10 @@ extern M5GFX display;
 
 void initFont() { display.setFont(&fonts::efontJA_16); }
 
-void p(const char *str) { display.println(str); }
+void p(const char *str, int textColor = WHITE_COLOR,
+       int bgColor = BLACK_COLOR) {
+  display.setTextColor(textColor, bgColor);
+  display.println(str);
+}
 
 #endif
