@@ -20,7 +20,10 @@ void initAutoBrightness() {
 
 void autoBrightness() {
   read_als_value = CoreS3.Ltr553.getAlsValue();
-  M5.Lcd.setBrightness(read_als_value * 5 + 50);
+  if (read_als_value > 100) {
+    read_als_value = 100;
+  }
+  M5.Lcd.setBrightness(read_als_value + 50);
 }
 
 #endif
