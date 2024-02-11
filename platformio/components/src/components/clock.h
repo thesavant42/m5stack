@@ -3,26 +3,30 @@
 
 #include <M5GFX.h>
 #include <M5Unified.h>
+#include <time.h>
 
 #include "../const.h"
 
 extern M5GFX display;
 
-void drawClock(int x, int y) {
-  //   RTC_TimeTypeDef nowTime;
-  //   RTC_DateTypeDef nowDate;
-  //   M5.Rtc.GetTime(&nowTime);  // 現在時刻の取得
-  //   M5.Rtc.GetDate(&nowDate);  // 現在日付の取得
+const char* week[7] = {"日", "月", "火", "水", "木", "金", "土"};
 
-  //   char timeStr[20];
-  //   sprintf(timeStr, "%04d/%02d/%02d %02d:%02d:%02d", nowDate.Year,
-  //   nowDate.Month,
-  //           nowDate.Date, nowTime.Hours, nowTime.Minutes, nowTime.Seconds);
+void drawClock(LGFX_Sprite* sprite, int x, int y) {
+  time_t now = time(NULL);
+  struct tm* timeinfo = localtime(&now);
 
-  //   display.setCursor(x, y);
-  //   display.setTextColor(WHITE);
-  //   display.setTextSize(1);
-  //   display.println(timeStr);  // 時刻をディスプレイに表示
+  sprite->setTextSize(1);
+  sprite->setTextColor(WHITE_COLOR, BLACK_COLOR);
+  sprite->setCursor(x, y);
+  sprite->setFont(&fonts::lgfxJapanGothic_16);
+
+  if (timeinfo->tm_year == 99) {
+    sprite->printf("--/--(-) --:--");
+  } else {
+    sprite->printf("%02d/%02d(%s) %02d:%02d", timeinfo->tm_mon + 1,
+                   timeinfo->tm_mday, week[timeinfo->tm_wday],
+                   timeinfo->tm_hour, timeinfo->tm_min);
+  }
 }
 
 #endif
