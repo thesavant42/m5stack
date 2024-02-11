@@ -26,9 +26,9 @@ void actionButton1() {
 
   puts("考え中...", 1, 0, 20);
   String content = completions("100文字程度で何かタメになる雑学をお話しして。子供が好きそうなネタで。友達に話すような感じで。本当の話で。");
-  
+
   resetScreen();
-  
+
   puts(const_cast<char*>(content.c_str()), 1, 0, 20);
   if (content != "") {
     String speech = textToSpeech(content);
@@ -46,9 +46,9 @@ Button button2(160, 180, 160, 60, "録音", actionButton2);
 void setup() {
   Serial.begin(115200);
 
-  M5.Power.begin();
   M5.begin();
   M5.Lcd.fillScreen(BLACK);
+  M5.Lcd.setRotation(3);
 
   if (!SD.begin(4)) {
     puts("SDカードがない", 2);

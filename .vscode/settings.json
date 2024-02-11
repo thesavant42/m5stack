@@ -17,5 +17,6 @@
     "*.tsx": "$(capture).module.css,$(capture).css"
   },
 
-  "cSpell.words": ["clipboardy", "himanushi", "openai", "preact"]
+  "cSpell.words": ["clipboardy", "himanushi", "openai", "preact"],
+  "cmake.configureOnOpen": false
 }
