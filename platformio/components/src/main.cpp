@@ -2,7 +2,7 @@
 #include <M5Unified.h>
 #include <SD.h>
 
-#include "components/statusbar.h"
+#include "components/status-bar.h"
 #include "components/wifi-status.h"
 #include "const.h"
 #include "features/brightness.h"
@@ -29,7 +29,7 @@ void setup() {
 
   // draw
   display.fillScreen(GRAY_COLOR);
-  drawStatusbar();
+  drawStatusBar();
 }
 
 void loop() {
@@ -42,7 +42,7 @@ void loop() {
   }
 
   if (scheduler.intervalMs(10000)) {
-    drawStatusbar();
+    drawStatusBar();
   }
 
   display.display();

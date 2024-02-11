@@ -10,7 +10,7 @@
 
 extern M5GFX display;
 
-void drawStatusbar() {
+void drawStatusBar() {
   display.fillRect(0, 0, display.width(), 20, BLACK_COLOR);
 
   drawBattery(display.width() - 30, 4);

@@ -1,44 +1,21 @@
 #include <M5GFX.h>
 
-#include "const.h"
-
-M5GFX display;
-
-void drawStatusBar() {
-  // ステータスバーの背景
-  display.fillRect(0, 0, display.width(), 20, BLACK_COLOR);
-  
-  // バッテリー残量の表示（仮の値）
-  display.setTextColor(WHITE_COLOR, BLACK_COLOR);
-  display.setTextSize(1);
-  display.setCursor(5, 5);
-  display.print("75%");
-
-  // Wi-Fi 状態の表示（仮のアイコン）
-  display.drawCircle(display.width() - 20, 10, 5, WHITE_COLOR);
-}
-
-void drawContent() {
-  // コンテンツ領域の背景
-  display.fillRect(0, 20, display.width(), display.height() - 20, GREEN_COLOR);
-
-  // コンテンツの例（テキスト）
-  display.setTextColor(WHITE_COLOR, GREEN_COLOR);
-  display.setTextSize(1);
-  display.setCursor(10, 30);
-  display.setFont(&fonts::efontJA_12);
-  display.print("何かのコンテンツが表示されます。");
-}
+static M5GFX lcd;                     // LGFXのインスタンスを作成。
+static LGFX_Sprite sprite(&lcd);      // lcdに描画するスプライト作成
+static LGFX_Sprite sprite2(&sprite);  // spriteに描画するスプライト作成
+static LGFX_Sprite sprite3;  // デフォルト描画先設定がないスプライト作成
 
 void setup() {
-  display.begin();
-  display.setRotation(1); // 必要に応じて画面の向きを設定
-  display.setBrightness(60);
-
-  drawStatusBar(); // ステータスバーの描画
-  drawContent(); // コンテンツの描画
+  lcd.init();
+  sprite.createSprite(64, 64);
+  sprite2.createSprite(32, 32);
+  sprite3.createSprite(16, 16);
+  sprite.fillScreen(TFT_RED);
+  sprite2.fillScreen(TFT_BLUE);
+  sprite3.fillScreen(TFT_GREEN);
+  sprite3.pushSprite(&sprite2, 0, 0);
+  sprite2.pushSprite(0, 0);
+  sprite.pushSprite(0, 0);
 }
 
-void loop() {
-  // ここにループ内で実行するコードを記述（例: ステータスバーの情報更新）
-}
+void loop() {}
