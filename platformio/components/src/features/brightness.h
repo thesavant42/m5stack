@@ -9,18 +9,18 @@ uint16_t read_ps_value;
 uint16_t read_als_value;
 
 void initAutoBrightness() {
-    if (!CoreS3.Ltr553.begin(&device_init_base_para)) {
-        while (1) {
-            delay(10);
-        }
+  if (!CoreS3.Ltr553.begin(&device_init_base_para)) {
+    while (1) {
+      delay(10);
     }
-    CoreS3.Ltr553.setPsMode(LTR5XX_PS_ACTIVE_MODE);
-    CoreS3.Ltr553.setAlsMode(LTR5XX_ALS_ACTIVE_MODE);
+  }
+  CoreS3.Ltr553.setPsMode(LTR5XX_PS_ACTIVE_MODE);
+  CoreS3.Ltr553.setAlsMode(LTR5XX_ALS_ACTIVE_MODE);
 }
 
 void autoBrightness() {
-    read_als_value = CoreS3.Ltr553.getAlsValue();
-    M5.Lcd.setBrightness(read_als_value*5+50);
+  read_als_value = CoreS3.Ltr553.getAlsValue();
+  M5.Lcd.setBrightness(read_als_value * 5 + 50);
 }
 
 #endif

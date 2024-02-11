@@ -1,5 +1,5 @@
-#include <M5Unified.h>
 #include <M5GFX.h>
+#include <M5Unified.h>
 
 #include "features/display.h"
 #include "features/scheduler.h"
@@ -12,10 +12,6 @@ void setup() {
 
   display.setFont(&fonts::efontJA_16);
   display.println("こんにちは日本");
-
-
-
-  
 }
 
 void loop() {
