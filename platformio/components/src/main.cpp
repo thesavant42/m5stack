@@ -3,28 +3,29 @@
 #include <SD.h>
 
 #include "components/status-bar.h"
-#include "components/wifi-status.h"
+// #include "components/wifi-status.h"
 #include "const.h"
 #include "features/brightness.h"
 #include "features/display.h"
 #include "features/env.h"
-#include "features/font.h"
-#include "features/rtc.h"
+// #include "features/font.h"
+// #include "features/rtc.h"
 #include "features/scheduler.h"
 #include "features/wifi.h"
 
-M5GFX display;
 Scheduler scheduler;
+
+M5GFX display;
 
 void setup() {
   M5.begin();
 
   // init
   initDisplay();
-  initFont();
+  // initFont();
   initEnv(SD, "/env.txt");
   initWifi();
-  initRtc();
+  // initRtc();
   initAutoBrightness();
 
   // draw
@@ -35,15 +36,11 @@ void setup() {
 void loop() {
   M5.update();
 
-  display.waitDisplay();
-
   if (scheduler.intervalMs(1000)) {
     autoBrightness();
   }
 
-  if (scheduler.intervalMs(10000)) {
+  if (scheduler.intervalMs(1000)) {
     drawStatusBar();
   }
-
-  display.display();
 }

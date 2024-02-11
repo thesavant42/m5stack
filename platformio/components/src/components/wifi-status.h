@@ -10,9 +10,9 @@
 
 extern M5GFX display;
 
-void drawWifiStatus(int x, int y) {
+void drawWifiStatus(LGFX_Sprite* sprite, int x, int y) {
   int width = 3;            // 各バーの幅
-  int height = 15;          // 最下部のバーの高さ
+  int height = 16;          // 最下部のバーの高さ
   int gap = 2;              // バー間の隙間
   int level = WiFi.RSSI();  // RSSI値を取得
 
@@ -31,7 +31,7 @@ void drawWifiStatus(int x, int y) {
     int barHeight = (i + 1) * (height / 4);  // 各バーの高さ
     int barY = y + (height - barHeight);  // Y位置を調整してバーを描画
     int color = (i < bars) ? WHITE_COLOR : GRAY_COLOR;
-    display.fillRect(x + (i * (width + gap)), barY, width, barHeight, color);
+    sprite->fillRect(x + (i * (width + gap)), barY, width, barHeight, color);
   }
 }
 

@@ -8,22 +8,22 @@
 
 extern M5GFX display;
 
-void drawBattery(int x, int y) {
+void drawBattery(LGFX_Sprite* sprite, int x, int y) {
   int width = 25;
   int height = 13;
   int32_t level = M5.Power.getBatteryLevel();
 
-  // バッテリーの枠を描画
-  display.drawRect(x, y, width, height, WHITE_COLOR);
+  // バッテリーの枠をスプライトに描画
+  sprite->drawRect(x, y, width, height, WHITE_COLOR);
 
-  // バッテリーの頭部を描画
+  // バッテリーの頭部をスプライトに描画
   int headWidth = 3;
-  display.fillRect(x + width, y + height / 4, headWidth, height / 2,
+  sprite->fillRect(x + width, y + height / 4, headWidth, height / 2,
                    WHITE_COLOR);
 
-  // バッテリーレベルに基づいて内部を塗りつぶす
+  // バッテリーレベルに基づいて内部をスプライトに塗りつぶす
   int fillWidth = (level * (width - 2)) / 100;
-  display.fillRect(x + 1, y + 1, fillWidth, height - 2, WHITE_COLOR);
+  sprite->fillRect(x + 1, y + 1, fillWidth, height - 2, WHITE_COLOR);
 }
 
 #endif
