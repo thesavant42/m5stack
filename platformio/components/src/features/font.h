@@ -10,7 +10,7 @@ void initFont() { display.setFont(&fonts::efontJA_16); }
 void p(const char *str, int textColor = WHITE_COLOR,
        int bgColor = BLACK_COLOR) {
   display.setTextColor(textColor, bgColor);
-  display.println(str);
+  display.print(str);
 }
 
 #endif
