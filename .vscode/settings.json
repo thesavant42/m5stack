@@ -12,6 +12,8 @@
     ]
   },
 
+  "clang-format.executable": "/opt/homebrew/bin/clang-format",
+
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
     "*.tsx": "$(capture).module.css,$(capture).css"
