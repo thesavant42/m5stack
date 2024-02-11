@@ -3,6 +3,7 @@
 
 #include "features/brightness.h"
 #include "features/display.h"
+#include "features/font.h"
 #include "features/scheduler.h"
 
 M5GFX display;
@@ -11,11 +12,11 @@ Scheduler scheduler;
 void setup() {
   M5.begin();
 
-  initDisplay(&display);
+  initDisplay();
   initAutoBrightness();
+  initFont();
 
-  display.setFont(&fonts::efontJA_16);
-  display.println("こんにちは日本");
+  p("こんにちは日本");
 }
 
 void loop() {
@@ -23,7 +24,7 @@ void loop() {
 
   display.waitDisplay();
 
-  if (scheduler.intervalMs(100)) {
+  if (scheduler.intervalMs(1000)) {
     autoBrightness();
   }
 

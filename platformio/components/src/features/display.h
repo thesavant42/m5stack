@@ -3,9 +3,11 @@
 
 #include <M5GFX.h>
 
-void initDisplay(M5GFX *display) {
-  display->begin();
-  display->setRotation(3);
+extern M5GFX display;
+
+void initDisplay() {
+  display.begin();
+  display.setRotation(3);
 }
 
 #endif

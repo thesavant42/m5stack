@@ -14,7 +14,6 @@ void initAutoBrightness() {
       delay(10);
     }
   }
-  CoreS3.Ltr553.setPsMode(LTR5XX_PS_ACTIVE_MODE);
   CoreS3.Ltr553.setAlsMode(LTR5XX_ALS_ACTIVE_MODE);
 }
 
