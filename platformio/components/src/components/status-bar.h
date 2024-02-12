@@ -14,7 +14,7 @@ extern M5GFX display;
 void drawStatusBar() {
   LGFX_Sprite statusBar;
 
-  statusBar.createSprite(display.width(), 26);
+  statusBar.createSprite(display.width(), STATUS_BAR_HEIGHT);
   statusBar.fillScreen(BLACK_COLOR);
 
   drawClock(&statusBar, 4, 5);
