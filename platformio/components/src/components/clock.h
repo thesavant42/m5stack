@@ -9,8 +9,6 @@
 
 extern M5GFX display;
 
-const char* week[7] = {"日", "月", "火", "水", "木", "金", "土"};
-
 void drawClock(LGFX_Sprite* sprite, int x, int y) {
   time_t now = time(NULL);
   struct tm* timeinfo = localtime(&now);
@@ -21,11 +19,9 @@ void drawClock(LGFX_Sprite* sprite, int x, int y) {
   sprite->setFont(&fonts::lgfxJapanGothic_16);
 
   if (timeinfo->tm_year == 99) {
-    sprite->printf("--/--(-) --:--");
+    sprite->printf("--:--");
   } else {
-    sprite->printf("%02d/%02d(%s) %02d:%02d", timeinfo->tm_mon + 1,
-                   timeinfo->tm_mday, week[timeinfo->tm_wday],
-                   timeinfo->tm_hour, timeinfo->tm_min);
+    sprite->printf("%02d:%02d", timeinfo->tm_hour, timeinfo->tm_min);
   }
 }
 

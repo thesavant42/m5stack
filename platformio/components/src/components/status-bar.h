@@ -17,7 +17,7 @@ void drawStatusBar() {
   statusBar.createSprite(display.width(), 26);
   statusBar.fillScreen(BLACK_COLOR);
 
-  drawClock(&statusBar, 4, 4);
+  drawClock(&statusBar, 4, 5);
   drawWifiStatus(&statusBar, statusBar.width() - 65, 5);
   drawBattery(&statusBar, statusBar.width() - 35, 6);
 

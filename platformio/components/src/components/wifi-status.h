@@ -6,9 +6,6 @@
 #include <WiFi.h>
 
 #include "../const.h"
-#include "../features/font.h"
-
-extern M5GFX display;
 
 void drawWifiStatus(LGFX_Sprite* sprite, int x, int y) {
   int width = 3;            // 各バーの幅

@@ -4,16 +4,30 @@
 #include <WiFi.h>
 
 #include "env.h"
-#include "font.h"
+
+extern M5GFX display;
 
 void initWifi() {
-  p("Wifi Connecting", WHITE_COLOR, GRAY_COLOR);
+  LGFX_Sprite sprite;
+
+  sprite.createSprite(display.width(), display.height());
+  sprite.fillScreen(BLACK_COLOR);
+
+  sprite.setTextColor(WHITE_COLOR, BLACK_COLOR);
+  sprite.setFont(&fonts::lgfxJapanGothic_16);
+  sprite.print("wifi connecting...");
 
   WiFi.begin(getEnvValue("WIFI_SSID"), getEnvValue("WIFI_PASSWORD"));
+
+  sprite.pushSprite(&display, 0, 0);
+
   while (WiFi.status() != WL_CONNECTED) {
-    p(".", WHITE_COLOR, GRAY_COLOR);
+    sprite.print(".");
+    sprite.pushSprite(&display, 0, 0);
     delay(500);
   }
+
+  sprite.deleteSprite();
 
   // OpenAI API の DNS サーバーを指定
   IPAddress dns(104, 18, 6, 192);

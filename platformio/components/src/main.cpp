@@ -3,12 +3,10 @@
 #include <SD.h>
 
 #include "components/status-bar.h"
-// #include "components/wifi-status.h"
 #include "const.h"
 #include "features/brightness.h"
 #include "features/display.h"
 #include "features/env.h"
-// #include "features/font.h"
 #include "features/rtc.h"
 #include "features/scheduler.h"
 #include "features/wifi.h"
@@ -22,7 +20,6 @@ void setup() {
 
   // init
   initDisplay();
-  // initFont();
   initEnv(SD, "/env.txt");
   initWifi();
   initRtc();

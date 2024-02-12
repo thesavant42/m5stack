@@ -7,13 +7,11 @@
 #include <map>
 #include <string>
 
-#include "font.h"
-
 std::map<String, String> envVariables;
 
 void initEnv(fs::FS &fs, const char *path) {
   if (!SD.begin(4)) {
-    p("SDカードが認識されていません");
+    M5.Lcd.print("SDカードが認識されていません");
     return;
   }
 
