@@ -3,6 +3,8 @@
 
 #include <M5Unified.h>
 
+#include "../const.h"
+
 static constexpr const char* state_name[16] = {
     "none", "touch", "touch_end", "touch_begin",
     "___",  "hold",  "hold_end",  "hold_begin",
@@ -30,9 +32,12 @@ class Button {
 
   // ボタンをLCDまたはスプライトに描画
   void draw() {
-    sprite->drawRect(x, y, width, height, TFT_WHITE);  // 枠を描画
-    sprite->setTextColor(TFT_WHITE, TFT_BLACK);        // 文字色を設定
-    sprite->setCursor(x + 5, y + height / 2 - 4);  // ラベルの表示位置を設定
+    sprite->fillRoundRect(x, y, width, height, 10, GREEN_COLOR);
+    sprite->setTextColor(WHITE_COLOR, GREEN_COLOR);
+    int textWidth = sprite->textWidth(label);
+    int textX = x + (width - textWidth) / 2;
+    int textY = y + (height - 16) / 2;
+    sprite->setCursor(textX, textY);
     sprite->print(label);
   }
 
