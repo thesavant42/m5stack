@@ -7,6 +7,7 @@
 #include "../api/openai.h";
 #include "../components/button.h";
 #include "../const.h";
+// #include "../features/camera.h";
 
 extern M5GFX display;
 
@@ -59,6 +60,10 @@ void updateApp() {
     Serial.printf("x: %d, y: %d\n", localX, localY);
     buttonManager.handleTouch(localX, localY);
   }
+
+  // if (M5.BtnPWR.wasClicked()) {
+  //   shot();
+  // }
 }
 
 #endif
