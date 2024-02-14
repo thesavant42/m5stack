@@ -7,7 +7,6 @@
 #include "components/status-bar.h"
 #include "const.h"
 #include "features/brightness.h"
-// #include "features/camera.h"
 #include "features/display.h"
 #include "features/env.h"
 #include "features/rtc.h"
@@ -25,7 +24,6 @@ void setup() {
   initEnv(SD, "/env.txt");
   initWifi();
   initRtc();
-  // initCamera();
   initAutoBrightness();
 
   // draw

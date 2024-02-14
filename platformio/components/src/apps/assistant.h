@@ -1,15 +1,16 @@
 #ifndef APP_H
 #define APP_H
 
+#include <Audio.h>
 #include <M5GFX.h>
 #include <M5Unified.h>
 
 #include "../api/openai.h";
 #include "../components/button.h";
 #include "../const.h";
-// #include "../features/camera.h";
 
 extern M5GFX display;
+extern Audio audio;
 
 LGFX_Sprite app;
 ButtonManager buttonManager;
@@ -34,6 +35,8 @@ void drawButtons() {
         app.print(content);
         drawButtons();
         app.pushSprite(&display, 0, STATUS_BAR_HEIGHT);
+
+        textToSpeech(content);
       });
   buttonManager.drawButtons();
 }

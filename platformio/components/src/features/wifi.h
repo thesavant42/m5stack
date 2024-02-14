@@ -17,6 +17,7 @@ void initWifi() {
   sprite.setFont(&fonts::lgfxJapanGothic_16);
   sprite.print("wifi connecting...");
 
+  Serial.println(getEnvValue("WIFI_SSID"));
   WiFi.begin(getEnvValue("WIFI_SSID"), getEnvValue("WIFI_PASSWORD"));
 
   sprite.pushSprite(&display, 0, 0);

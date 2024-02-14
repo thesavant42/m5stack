@@ -49,7 +49,7 @@ String completions(const String& content) {
   return text;
 }
 
-String textToSpeech(const String& content) {
+void textToSpeech(const String& content) {
   HTTPClient http;
   http.begin(String(openai_endpoint) + "/audio/speech");
   http.addHeader("Content-Type", "application/json");
@@ -63,12 +63,12 @@ String textToSpeech(const String& content) {
 
   String response = http.getString();
 
-  String text = content;
   if (httpResponseCode > 0) {
     File file = SD.open("/tts.mp3", FILE_WRITE);
     if (file) {
       http.writeToStream(&file);
       file.close();
+      Serial.println("Saved: /tts.mp3");
     } else {
       Serial.println("Failed to open file on SD card");
     }
@@ -78,8 +78,6 @@ String textToSpeech(const String& content) {
   }
 
   http.end();
-
-  return text;
 }
 
 #endif
