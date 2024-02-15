@@ -4,11 +4,16 @@
       "path": "./",
     },
     {
+      "name": "components",
       "path": "platformio/components",
     },
     {
       "name": "talkbot",
       "path": "platformio/talkbot",
+    },
+    {
+      "name": "esptest",
+      "path": "platformio/esptest",
     },
   ],
   "settings": {
@@ -16,6 +21,11 @@
     "clang-format.executable": "/opt/homebrew/bin/clang-format",
     "editor.tabSize": 2,
     "cSpell.words": [],
+    "files.associations": {
+      "*.css": "postcss",
+      "m5unified.h": "c",
+      "task.h": "c",
+    },
   },
   "extensions": {
     "recommendations": [],
