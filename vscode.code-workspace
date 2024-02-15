@@ -1,0 +1,25 @@
+{
+  "folders": [
+    {
+      "path": "./",
+    },
+    {
+      "path": "./platformio/assistant",
+    },
+    {
+      "path": "./platformio/components",
+    },
+    {
+      "path": "./platformio/talk",
+    },
+  ],
+  "settings": {
+    "editor.formatOnSave": true,
+    "clang-format.executable": "/opt/homebrew/bin/clang-format",
+    "editor.tabSize": 2,
+    "cSpell.words": [],
+  },
+  "extensions": {
+    "recommendations": [],
+  },
+}

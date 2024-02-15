@@ -15,16 +15,20 @@
 
 Scheduler scheduler;
 M5GFX display;
+m5::board_t board;
 
 void setup() {
   M5.begin();
+  board = M5.getBoard();
 
   // init
   initDisplay();
   initEnv(SD, "/env.txt");
   initWifi();
   initRtc();
-  initAutoBrightness();
+  if (board == m5::board_t::board_M5StackCoreS3) {
+    initAutoBrightness();
+  }
 
   // draw
   display.fillScreen(GRAY_COLOR);
@@ -38,7 +42,9 @@ void loop() {
   updateApp();
 
   if (scheduler.intervalMs(1000)) {
-    autoBrightness();
+    if (board == m5::board_t::board_M5StackCoreS3) {
+      autoBrightness();
+    }
   }
 
   if (scheduler.intervalMs(1000)) {

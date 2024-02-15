@@ -7,11 +7,25 @@
 #include <map>
 #include <string>
 
+#include "../credentials.h"
+
+extern const char* WIFI_SSID;
+extern const char* WIFI_PASSWORD;
+extern const char* API_KEY;
+
 std::map<String, String> envVariables;
 
-void initEnv(fs::FS &fs, const char *path) {
+void initEnv(fs::FS& fs, const char* path) {
+  envVariables["WIFI_SSID"] = WIFI_SSID;
+  envVariables["WIFI_PASSWORD"] = WIFI_PASSWORD;
+  envVariables["API_KEY"] = API_KEY;
+  return;
+
   if (!SD.begin(4)) {
-    M5.Lcd.print("SDカードが認識されていません");
+    Serial.println("SDカードが認識されていません");
+    envVariables["WIFI_SSID"] = WIFI_SSID;
+    envVariables["WIFI_PASSWORD"] = WIFI_PASSWORD;
+    envVariables["API_KEY"] = API_KEY;
     return;
   }
 
@@ -33,7 +47,7 @@ void initEnv(fs::FS &fs, const char *path) {
   file.close();
 }
 
-String getEnvValue(const String &key) {
+String getEnvValue(const String& key) {
   if (envVariables.find(key) != envVariables.end()) {
     return envVariables[key];
   }
