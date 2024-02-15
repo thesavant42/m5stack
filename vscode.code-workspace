@@ -4,13 +4,11 @@
       "path": "./",
     },
     {
-      "path": "./platformio/assistant",
+      "path": "platformio/components",
     },
     {
-      "path": "./platformio/components",
-    },
-    {
-      "path": "./platformio/talk",
+      "name": "talkbot",
+      "path": "platformio/talkbot",
     },
   ],
   "settings": {
