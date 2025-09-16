@@ -1,14 +1,14 @@
-# M5Stack 初心者の私のためのメモ
+# Notes for M5Stack Beginners
 
-- C++ で実装するには Arduino IDE または PlatformIO を使用する。
-- MicroPython で実装するには UiFlow を使用する。
-- JavaScript で実装するには Moddable SDK または Espruino を使用する。
-- フルスクラッチで C++ で開発するのは結構しんどいので、基本的には何かしらのfirmwareを使うことになる。
-- 一旦フルスクラッチで開発したものは assistant/assistant.ino で実装してある。
+- To implement in C++, use the Arduino IDE or PlatformIO.
+- To implement in MicroPython, use UiFlow.
+- To implement in JavaScript, use the Moddable SDK or Espruino.
+- Developing in C++ from scratch is quite tedious, so you'll generally need to use some kind of firmware.
+- Once you've developed something from scratch, it's implemented in assistant/assistant.ino.
 
-[ここの公式](https://github.com/m5stack/M5Stack/blob/master/docs/getting_started_ja.md)を参考にすると良い。
+You can refer to the official documentation here: [https://github.com/m5stack/M5Stack/blob/master/docs/getting_started_ja.md]
 
-### M5Stack で JavaScript を動かす(Mac)
+### Running JavaScript with M5Stack (Mac)
 
-1. https://github.com/Moddable-OpenSource/moddable/blob/public/documentation/Moddable%20SDK%20-%20Getting%20Started.md#macos に従って Moddable SDK をインストールする。
-1. https://github.com/Moddable-OpenSource/moddable/blob/public/documentation/devices/esp32.md#macos に従って ESP32 のドライバをインストールする。
+1. Install the Moddable SDK by following https://github.com/Moddable-OpenSource/moddable/blob/public/documentation/Moddable%20SDK%20-%20Getting%20Started.md#macos.
+1. Install the ESP32 driver by following https://github.com/Moddable-OpenSource/moddable/blob/public/documentation/devices/esp32.md#macos.
