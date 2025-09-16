@@ -6,16 +6,17 @@
 #include <M5Unified.h>
 #include <SD.h>
 
-const char* openai_endpoint = "https://api.openai.com/v1";
+#const char* openai_endpoint = "https://api.openai.com/v1";
+const char* openai_endpoint = "http://192.168.1.98:1234/v1";
 
 String completions(const String& content) {
   HTTPClient http;
   http.begin(String(openai_endpoint) + "/chat/completions");
   http.addHeader("Content-Type", "application/json");
-  http.addHeader("Authorization", "Bearer " + String(getEnvValue("API_KEY")));
+  #http.addHeader("Authorization", "Bearer " + String(getEnvValue("API_KEY")));
   http.setTimeout(60000);
 
-  String postData = "{\"model\": \"gpt-4-turbo-preview\", \"messages\": [{\"role\": \"user\", \"content\": \"" + content + "\"}]}";
+  String postData = "{\"model\": \"qwen3-4b-instruct-2507\", \"messages\": [{\"role\": \"user\", \"content\": \"" + content + "\"}]}";
 
   int httpResponseCode = http.POST(postData);
   String text = "";
@@ -48,10 +49,10 @@ String textToSpeech(const String& content) {
   HTTPClient http;
   http.begin(String(openai_endpoint) + "/audio/speech");
   http.addHeader("Content-Type", "application/json");
-  http.addHeader("Authorization", "Bearer " + String(getEnvValue("API_KEY")));
+  #http.addHeader("Authorization", "Bearer " + String(getEnvValue("API_KEY")));
   http.setTimeout(60000);
 
-  String postData = "{\"model\": \"tts-1\", \"voice\": \"alloy\", \"input\": \"" + content + "\"}";
+  String postData = "{\"model\": \"chatterbox\", \"voice\": \"voices/chatterbox/whywishnotfar.wav\", \"input\": \"" + content + "\"}";
   int httpResponseCode = http.POST(postData);
 
   String response = http.getString();
@@ -66,7 +67,7 @@ String textToSpeech(const String& content) {
       Serial.println("Failed to open file on SD card");
     }
   } else {
-    Serial.println("TextToSpeech でエラー発生");
+    Serial.println("Error in TextToSpeech");
     Serial.println(httpResponseCode);
   }
 
