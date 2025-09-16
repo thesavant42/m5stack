@@ -15,7 +15,7 @@ void initWifi() {
   M5.Lcd.fillScreen(BLACK);
 
   // OpenAI API の DNS サーバーを指定
-  IPAddress dns(104, 18, 6, 192);
+  IPAddress dns(192, 168, 1, 1);
   WiFi.config(INADDR_NONE, INADDR_NONE, INADDR_NONE, dns);
 }
 
