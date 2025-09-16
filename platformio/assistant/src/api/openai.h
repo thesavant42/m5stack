@@ -6,14 +6,14 @@
 #include <M5Unified.h>
 #include <SD.h>
 
-#const char* openai_endpoint = "https://api.openai.com/v1";
+//const char* openai_endpoint = "https://api.openai.com/v1";
 const char* openai_endpoint = "http://192.168.1.98:1234/v1";
 
 String completions(const String& content) {
   HTTPClient http;
   http.begin(String(openai_endpoint) + "/chat/completions");
   http.addHeader("Content-Type", "application/json");
-  #http.addHeader("Authorization", "Bearer " + String(getEnvValue("API_KEY")));
+  //http.addHeader("Authorization", "Bearer " + String(getEnvValue("API_KEY")));
   http.setTimeout(60000);
 
   String postData = "{\"model\": \"qwen3-4b-instruct-2507\", \"messages\": [{\"role\": \"user\", \"content\": \"" + content + "\"}]}";
@@ -49,7 +49,7 @@ String textToSpeech(const String& content) {
   HTTPClient http;
   http.begin(String(openai_endpoint) + "/audio/speech");
   http.addHeader("Content-Type", "application/json");
-  #http.addHeader("Authorization", "Bearer " + String(getEnvValue("API_KEY")));
+  //http.addHeader("Authorization", "Bearer " + String(getEnvValue("API_KEY")));
   http.setTimeout(60000);
 
   String postData = "{\"model\": \"chatterbox\", \"voice\": \"voices/chatterbox/whywishnotfar.wav\", \"input\": \"" + content + "\"}";
@@ -59,7 +59,7 @@ String textToSpeech(const String& content) {
 
   String text = content;
   if (httpResponseCode > 0) {
-    File file = SD.open("/tts.mp3", FILE_WRITE);
+    File file = SD.open("/tts.wav", FILE_WRITE);
     if (file) {
       http.writeToStream(&file);
       file.close();
